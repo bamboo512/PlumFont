@@ -26,6 +26,7 @@
 // @match        https://*.chrome.com/*
 // @match        https://web.dev/*
 // @match        https://developer.android.com/*
+// @match        https://huggingface.co/*
 
 // ==/UserScript==
 
@@ -110,7 +111,7 @@ let styleList = {
             font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Google Sans Text","Inter", "Segoe UI Variable Display","Apple Color Emoji", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"!important
         } `,
     'google': `
-        .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std, .c2xzTb .co8aDb {
+        .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std{
             font-family: ${googleSansFont} !important;
         }
 
@@ -565,6 +566,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": /developer.android.com/,
     "style": ["developer.android.com"]
+}, {
+    "mode": "HOST_SUFFIX",
+    "domains": /huggingface.co/,
+    "style": ["general"]
 }
 
 ]
