@@ -567,8 +567,8 @@ let rulesList = [{
     "domains": /developer.android.com/,
     "style": ["developer.android.com"]
 }, {
-    "mode": "HOST_SUFFIX",
-    "domains": /huggingface.co/,
+    "mode": "HOST-SUFFIX",
+    "domains": "huggingface.co",
     "style": ["general"]
 }
 
@@ -576,7 +576,6 @@ let rulesList = [{
 
 
 let style = "";
-
 
 
 // using filter
@@ -597,9 +596,6 @@ filteredList.forEach(({ style: keyIndeces }) => {
         style += styleList[key]
     })
 })
-
-
-
 
 
 let css = document.createElement("style");
