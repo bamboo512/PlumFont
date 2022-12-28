@@ -28,6 +28,7 @@
 // @match        https://web.dev/*
 // @match        https://developer.android.com/*
 // @match        https://huggingface.co/*
+// @match        https://www.ithome.com/*
 
 // ==/UserScript==
 
@@ -570,6 +571,10 @@ let rulesList = [{
 }, {
     "mode": "HOST-SUFFIX",
     "domains": "huggingface.co",
+    "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /ithome.com/,
     "style": ["general"]
 }
 
