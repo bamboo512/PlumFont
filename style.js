@@ -29,7 +29,7 @@
 // @match        https://developer.android.com/*
 // @match        https://huggingface.co/*
 // @match        https://www.ithome.com/*
-
+// @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
 let globalMonoFont = `"SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
