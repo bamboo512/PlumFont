@@ -29,7 +29,7 @@
 // @match        https://developer.android.com/*
 // @match        https://huggingface.co/*
 // @match        https://www.ithome.com/*
-// match         https://google.github.io/comprehensive-rust/*
+// match         https://google.github.io/*
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
