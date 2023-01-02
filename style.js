@@ -29,6 +29,7 @@
 // @match        https://developer.android.com/*
 // @match        https://huggingface.co/*
 // @match        https://www.ithome.com/*
+// match         https://google.github.io/comprehensive-rust/*
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
@@ -575,6 +576,10 @@ let rulesList = [{
 }, {
     "mode": "HOST-SUFFIX",
     "domains": /ithome.com/,
+    "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /google.github.io\/comprehensive-rust/,
     "style": ["general"]
 }
 
