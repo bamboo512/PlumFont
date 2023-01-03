@@ -29,7 +29,9 @@
 // @match        https://developer.android.com/*
 // @match        https://huggingface.co/*
 // @match        https://www.ithome.com/*
-// match         https://google.github.io/*
+// @match        https://google.github.io/*
+// @match        https://doc.rust-lang.org/*
+// @match        https://www.infoq.cn/*
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
@@ -141,11 +143,18 @@ let styleList = {
         }
 
         body{
-        font-family: ${googleSansFont} !important;
+            font-family: ${googleSansFont} !important;
         }
         pre, code, kbd, samp{
-        font-family: ${globalMonoFont} !important;
-        } `,
+            font-family: ${globalMonoFont} !important;
+        } 
+        
+        .chr-copy {
+            font-family: ${googleSansFont} !important;
+        }
+        
+        `,
+
 
     'youtube': `
         html,body,
@@ -401,7 +410,6 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
 
-
             `,
 
     'dev.to': `
@@ -475,6 +483,15 @@ let styleList = {
         :root{
             --devsite-primary-font-family: ${googleSansFont} !important;
             --devsite-code-font-family: ${googleMonoFont} !important;
+        }
+    `,
+    'infoq.cn': `
+        html, body, button, input, select, textarea{
+            font-family: ${googleSansFont} !important;
+        }
+
+        .article-preview[data-type=doc]{
+            font-family: ${googleSansFont} !important;
         }
     `
 
@@ -579,8 +596,16 @@ let rulesList = [{
     "style": ["general"]
 }, {
     "mode": "HOST-SUFFIX",
-    "domains": /google.github.io\/comprehensive-rust/,
+    "domains": /google.github.io/,
     "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /doc.rust-lang.org/,
+    "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /www.infoq.cn/,
+    "style": ["infoq.cn"]
 }
 
 ]
