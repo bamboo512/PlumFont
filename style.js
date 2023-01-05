@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         更改网页默认显示字体
-// @version      1.0.2
+// @version      1.0.3
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -32,6 +32,7 @@
 // @match        https://google.github.io/*
 // @match        https://doc.rust-lang.org/*
 // @match        https://www.infoq.cn/*
+// @match        https://www.pixiv.net/*
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
@@ -43,6 +44,17 @@ let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono","Roboto Mo
 
 let domain = window.location.host
 console.log(domain)
+
+
+let lang = "zh-CN"
+function judgeLanguage() {
+    let lang = document.documentElement.lang
+    if (lang === undefined) {
+        lang = window.navigator.language;
+    }
+}
+judgeLanguage()
+
 
 let styleList = {
     'general': `
@@ -531,6 +543,11 @@ let styleList = {
         code, pre, .ace_editor{
             font-family: ${globalMonoFont} !important;
         }
+    `,
+    'pixiv.net': `
+        html, body {
+            font-family: Inter, Google Sans Text, Segoe UI Variable Display,sans-serif !important;
+        }
     `
 
 
@@ -644,6 +661,11 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": /www.infoq.cn/,
     "style": ["infoq.cn"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /www.pixiv.net/,
+    "style": ["general"],
+    "lang": ['zh-CN']
 }
 
 ]
@@ -651,10 +673,17 @@ let rulesList = [{
 
 let style = "";
 
-
 // using filter
 // filter the correspondent rule list
 let filteredList = rulesList.filter(item => {
+
+    // if the rule has a "lang" property
+    // and the "lang" property doesn't contain current language
+
+    if (item?.lang !== undefined && !item.lang.includes(lang)) {
+        console.log("language not match, skip this rule");
+        return false
+    }
 
     if (item.mode === "HOST-SUFFIX") {
         if (item.domains instanceof RegExp) {
