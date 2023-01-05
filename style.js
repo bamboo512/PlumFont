@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         更改网页默认显示字体
-// @version      1.0.1
+// @version      1.0.2
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -35,10 +35,11 @@
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
-let globalMonoFont = `"SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
+let globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
 let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter",'Segoe UI Variable Display','Google Sans Text','MiSans', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleSansFont = `'Google Sans Text',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display','MiSans', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleMonoFont = `"Google Sans Mono","SF Mono", "JetBrains Mono","Roboto Mono", monospace`;
+let googleSansDisplayFont = `'Google Sans','Google Sans Display',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display','MiSans', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono","Roboto Mono",ui-monospace, monospace`;
 
 let domain = window.location.host
 console.log(domain)
@@ -119,16 +120,39 @@ let styleList = {
         .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std{
             font-family: ${googleSansFont} !important;
         }
+        
+        /* Pop-over - Personal Info After Clicking Avatar */
+        .ZnExKf, .zpoCob{
+            font: 400 12px/16px ${googleSansFont} !important;
+        }
+
+
+        /* Video Search Result */
+        .WU6Mge {
+            font-family: ${googleSansDisplayFont} !important;
+        }
+        .Z1UVNe, .N2M7ie, .ZkkK1e.ZkkK1e, .NJU16b{
+            font-family: ${googleSansFont} !important;
+        }
+
+
+        /* Shopping */
+        .aULzUe, .bONr3b, .sh-sp__pswtr, .iXEZD{
+            font-family: ${googleSansFont} !important;
+        }
+
 
         /* search result Counts */
         #result-stats{
         font-family: ${googleSansFont} !important;
         }
 
+        
         /* Search ToolBar */
         .GLcBOb{
             font-family: ${googleSansFont} !important;
         }
+
 
         /* Related Search Item */
         .e9EfHf{
@@ -493,6 +517,20 @@ let styleList = {
         .article-preview[data-type=doc]{
             font-family: ${googleSansFont} !important;
         }
+
+        code, pre, pre tt, .article-preview [data-type=codeline], [data-type=doc] code, .article-preview code {
+            font-family: ${globalMonoFont} !important;
+        }
+    `,
+    'Comprehensive Rust': `
+
+        html, body, input, textarea, select, h1, h2, h3, h4, h5, h6, b, strong{
+            font-family: ${googleSansFont} !important;
+        }    
+
+        code, pre, .ace_editor{
+            font-family: ${globalMonoFont} !important;
+        }
     `
 
 
@@ -597,7 +635,7 @@ let rulesList = [{
 }, {
     "mode": "HOST-SUFFIX",
     "domains": /google.github.io/,
-    "style": ["general"]
+    "style": ["Comprehensive Rust"]
 }, {
     "mode": "HOST-SUFFIX",
     "domains": /doc.rust-lang.org/,
