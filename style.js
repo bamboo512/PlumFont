@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         更改网页默认显示字体
+// @name         梅花 - 更改网页默认显示字体
 // @version      1.0.4
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
@@ -35,6 +35,8 @@
 // @match        https://www.pixiv.net/*
 // @match        https://gin-gonic.com/*
 // @match        https://v2ex.com/*
+// @namespace    PlumFont
+// @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
@@ -722,5 +724,3 @@ let text = document.createTextNode(style);
 css.appendChild(text);
 let head = document.getElementsByTagName("head")[0];
 head.appendChild(css);
-
-
