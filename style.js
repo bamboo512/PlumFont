@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         更改网页默认显示字体
-// @version      1.0.3
+// @version      1.0.4
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -33,6 +33,8 @@
 // @match        https://doc.rust-lang.org/*
 // @match        https://www.infoq.cn/*
 // @match        https://www.pixiv.net/*
+// @match        https://gin-gonic.com/*
+// @match        https://v2ex.com/*
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 // ==/UserScript==
 
@@ -46,9 +48,10 @@ let domain = window.location.host
 console.log(domain)
 
 
+/* Judge Wwhich language is used */
 let lang = "zh-CN"
 function judgeLanguage() {
-    let lang = document.documentElement.lang
+    lang = document.documentElement.lang
     if (lang === undefined) {
         lang = window.navigator.language;
     }
@@ -544,9 +547,13 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    'pixiv.net': `
+    'gin-gonic.com': `
         html, body {
-            font-family: Inter, Google Sans Text, Segoe UI Variable Display,sans-serif !important;
+            font-family: ${globalSansFont} !important;
+        }
+
+        pre, code, kbd, samp{
+            font-family: ${globalMonoFont} !important;
         }
     `
 
@@ -666,7 +673,16 @@ let rulesList = [{
     "domains": /www.pixiv.net/,
     "style": ["general"],
     "lang": ['zh-CN']
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /gin-gonic.com/,
+    "style": ["gin-gonic.com"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /v2ex.com/,
+    "style": ["general"]
 }
+
 
 ]
 
@@ -678,10 +694,10 @@ let style = "";
 let filteredList = rulesList.filter(item => {
 
     // if the rule has a "lang" property
-    // and the "lang" property doesn't contain current language
+    // and the "lang" property doesn't contain current language => skip
 
     if (item?.lang !== undefined && !item.lang.includes(lang)) {
-        console.log("language not match, skip this rule");
+        console.log("language not match, skip this rule")
         return false
     }
 

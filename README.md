@@ -2,7 +2,7 @@
 
 将不再适应现代特性的网页字体，替换为更美观现代整洁的字体。
 
-被替换的字体：微软雅黑、苹方（仅英文数字）、Arial、Source Code Pro、Source Sans、Times New Roman、Consolas、Menlo、Monaco 等。
+被替换的字体：微软雅黑、苹方（仅英文数字）、Arial、Source Code Pro、Source Sans、Times New Roman、Open Sans、Consolas、Menlo、Monaco 等。
 
 替换为：Google Sans Text、Inter、SF Pro、MiSans、思源黑体、思源宋体等。
 
@@ -36,7 +36,9 @@
 26. [Android Developers](https://developer.android.com/)
 27. [huggingface.co](https://huggingface.co/)
 28. [Pixiv](https://www.pixiv.net/)
-
+29. [Gin 官网](https://gin-gonic.com/)
+30. [v2ex](https://v2ex.com/)
 
 ## 请特别关注
+
 1. 苹果平台下的 [Pixiv](https://www.pixiv.net/) 在简体中文环境下会错误调用日语字体，导致部分字符的字形不正确。所以 Pixiv 的策略仅在简体中文（zh-CN）环境下生效。
