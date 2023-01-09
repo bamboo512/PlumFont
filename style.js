@@ -50,7 +50,7 @@ let domain = window.location.host
 console.log(domain)
 
 
-/* Judge Wwhich language is used */
+/* Judge which language is used */
 let lang = "zh-CN"
 function judgeLanguage() {
     lang = document.documentElement.lang
@@ -484,7 +484,7 @@ let styleList = {
             font-family: ${globalSansFont} !important;
         } `,
     'juejin': `
-        body, html{
+        body, html, .markdown-body{
         font-family: ${globalSansFont} !important;
         }
 
