@@ -35,6 +35,9 @@
 // @match        https://www.pixiv.net/*
 // @match        https://gin-gonic.com/*
 // @match        https://v2ex.com/*
+// @match        https://*.vuejs.org/*
+// @match        https://*.d2l.ai/*
+
 // @namespace    PlumFont
 // @license      MIT
 // @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js// @match        https://*.vuejs.org/*
@@ -693,6 +696,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": "vuejs.org",
     "style": ["vuejs.org"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /d2l.ai/,
+    "style": ["general"]
 }
 
 
