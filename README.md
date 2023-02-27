@@ -42,3 +42,4 @@
 ## 请特别关注
 
 1. 苹果平台下的 [Pixiv](https://www.pixiv.net/) 在简体中文环境下会错误调用日语字体，导致部分字符的字形不正确。所以 Pixiv 的策略仅在简体中文（zh-CN）环境下生效。
+> 请特别关注：你需要首先安装 Inter、Google Sans Text、思源黑体、MiSans 等字体，才能看到效果。

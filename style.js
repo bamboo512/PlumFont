@@ -37,7 +37,8 @@
 // @match        https://v2ex.com/*
 // @namespace    PlumFont
 // @license      MIT
-// @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
+// @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js// @match        https://*.vuejs.org/*
+
 // ==/UserScript==
 
 let globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
@@ -557,6 +558,11 @@ let styleList = {
         pre, code, kbd, samp{
             font-family: ${globalMonoFont} !important;
         }
+    `,
+    'vuejs.org': `
+    pre, code, kbd, samp{
+        font-family: ${globalMonoFont} !important;
+    }
     `
 
 
@@ -683,6 +689,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": /v2ex.com/,
     "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": "vuejs.org",
+    "style": ["vuejs.org"]
 }
 
 
