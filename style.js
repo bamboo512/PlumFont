@@ -37,6 +37,7 @@
 // @match        https://v2ex.com/*
 // @match        https://*.vuejs.org/*
 // @match        https://*.d2l.ai/*
+// @match        https://course.rs/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -543,7 +544,7 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    'Comprehensive Rust': `
+    'mdBook': `
 
         html, body, input, textarea, select, h1, h2, h3, h4, h5, h6, b, strong{
             font-family: ${googleSansFont} !important;
@@ -670,7 +671,7 @@ let rulesList = [{
 }, {
     "mode": "HOST-SUFFIX",
     "domains": /google.github.io/,
-    "style": ["Comprehensive Rust"]
+    "style": ["mdBook"]
 }, {
     "mode": "HOST-SUFFIX",
     "domains": /doc.rust-lang.org/,
@@ -700,6 +701,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": /d2l.ai/,
     "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": /course.rs/,
+    "style": ["mdBook"]
 }
 
 
