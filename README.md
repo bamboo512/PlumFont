@@ -35,12 +35,13 @@
 25. [web.dev](https://web.dev/)
 26. [Android Developers](https://developer.android.com/)
 27. [huggingface.co](https://huggingface.co/)
-28. [Pixiv](https://www.pixiv.net/)
-29. [Gin 官网](https://gin-gonic.com/)
+28. [pixiv.net](https://www.pixiv.net/)
+29. [gin-gonic.com](https://gin-gonic.com/)
 30. [v2ex](https://v2ex.com/)
 31. [vuejs.org](https://vuejs.org/)
 32. [d2l.ai](https://d2l.ai)
 33. [course.rs](https://course.rs)
+34. [TypeScriptlang.org](https://www.typescriptlang.org)
 ## 请特别关注
 
 1. 你需要首先安装 Inter、Google Sans Text、思源黑体、MiSans 等字体，才能看到效果。

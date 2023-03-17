@@ -38,6 +38,7 @@
 // @match        https://*.vuejs.org/*
 // @match        https://*.d2l.ai/*
 // @match        https://course.rs/*
+// @match        https://*.typescriptlang.org/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -45,29 +46,29 @@
 
 // ==/UserScript==
 
+console.time()
+
 let globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
-let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter",'Segoe UI Variable Display','Google Sans Text','MiSans', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansFont = `'Google Sans Text',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display','MiSans', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansDisplayFont = `'Google Sans','Google Sans Display',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display','MiSans', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansFont = `'Google Sans Text',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansDisplayFont = `'Google Sans','Google Sans Display',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono","Roboto Mono",ui-monospace, monospace`;
 
-let domain = window.location.host
-console.log(domain)
-
+let domain = window.location.host;
+console.log(domain);
 
 /* Judge which language is used */
-let lang = "zh-CN"
+let lang = "zh-CN";
 function judgeLanguage() {
-    lang = document.documentElement.lang
+    lang = document.documentElement.lang;
     if (lang === undefined) {
         lang = window.navigator.language;
     }
 }
-judgeLanguage()
-
+judgeLanguage();
 
 let styleList = {
-    'general': `
+    general: `
         html,body, input, textarea, select, button,h1,h2,h3,h4,h5,h6,b, strong{
             font-family: ${globalSansFont} !important;
         }
@@ -75,7 +76,7 @@ let styleList = {
         code,pre{
             font-family: ${globalMonoFont} !important;
         } `,
-    'github': `
+    github: `
         body {
             font-family:${googleSansFont} !important;
         }
@@ -84,7 +85,7 @@ let styleList = {
             font-family:${googleSansFont} !important;
         } `,
 
-    'notion': `
+    notion: `
         .notion-app-inner,.notion-selectable, .notion-page-block, div[placeholder*='Heading'] {
             font-family:  ${globalSansFont} !important;
         }
@@ -92,7 +93,7 @@ let styleList = {
         span[spellcheck='false'], div[spellcheck='false']{
             font-family: ${globalMonoFont} !important;
         }`,
-    'bilibili': `
+    bilibili: `
         /* 用户详情页中，"主页、动态、投稿、合计和列表" 后的数字 字体 */
         .n .n-num{
             font-family:${googleSansFont}
@@ -130,7 +131,7 @@ let styleList = {
         }
 
         `,
-    'googleSource': `
+    googleSource: `
         .u-monospace {
             font-family: ${globalMonoFont};
         }
@@ -138,11 +139,11 @@ let styleList = {
         .Site {
             font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Google Sans Text","Inter", "Segoe UI Variable Display","Apple Color Emoji", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"!important
         } `,
-    'google': `
+    google: `
         .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std{
             font-family: ${googleSansFont} !important;
         }
-        
+
         /* Pop-over - Personal Info After Clicking Avatar */
         .ZnExKf, .zpoCob{
             font: 400 12px/16px ${googleSansFont} !important;
@@ -169,7 +170,7 @@ let styleList = {
         font-family: ${googleSansFont} !important;
         }
 
-        
+
         /* Search ToolBar */
         .GLcBOb{
             font-family: ${googleSansFont} !important;
@@ -193,16 +194,15 @@ let styleList = {
         }
         pre, code, kbd, samp{
             font-family: ${globalMonoFont} !important;
-        } 
-        
+        }
+
         .chr-copy {
             font-family: ${googleSansFont} !important;
         }
-        
+
         `,
 
-
-    'youtube': `
+    youtube: `
         html,body,
         .ytd-rich-grid-media,
         .ytd-video-meta-block,
@@ -458,7 +458,7 @@ let styleList = {
 
             `,
 
-    'dev.to': `
+    "dev.to": `
         html,body,dev{
 
             font-family:  ${globalSansFont} !important;
@@ -467,11 +467,11 @@ let styleList = {
         .text-styles{
             font-family: ${globalSansFont} !important;
         } `,
-    'medium': `
+    medium: `
         .a,.bv,.bc {
             font-family:${globalSansFont} !important;
         } `,
-    'reddit': `
+    reddit: `
         body,
         ._292iotee39Lmt0MkQZ2hPV,
         ._2ucWAzao-GLL6qRJ4USwVJ,
@@ -488,7 +488,7 @@ let styleList = {
         ._34dh2eyzMvJfjCBLeoWiDD {
             font-family: ${globalSansFont} !important;
         } `,
-    'juejin': `
+    juejin: `
         body, html, .markdown-body{
         font-family: ${globalSansFont} !important;
         }
@@ -497,17 +497,17 @@ let styleList = {
         font-family: ${globalMonoFont} !important;
         } `,
 
-    'vuejs.org': `
+    "vuejs.org": `
         .line-number, code, kbd{
             font-family: ${globalMonoFont} !important;
         } `,
 
-    'grpc.io': `
+    "grpc.io": `
         .td-search-input{
         font-family: "Font Awesome 5 Free", ${globalSansFont} !important;
         } `,
 
-    'developer.chrome.com': `
+    "developer.chrome.com": `
         .banner, .material-button, .skip-link, .toc__wrapper a, .type, .type ol:not([class])>li::before, .type--caption, .type--label, .type--small, :root{
             font-family: ${googleSansFont} !important;
         }
@@ -517,7 +517,7 @@ let styleList = {
 
     `,
 
-    'web.dev': `
+    "web.dev": `
         body{
             font-family: ${googleSansFont} !important;
         }
@@ -525,13 +525,13 @@ let styleList = {
             font-family: ${googleMonoFont} !important;
         }
     `,
-    'developer.android.com': `
+    "developer.android.com": `
         :root{
             --devsite-primary-font-family: ${googleSansFont} !important;
             --devsite-code-font-family: ${googleMonoFont} !important;
         }
     `,
-    'infoq.cn': `
+    "infoq.cn": `
         html, body, button, input, select, textarea{
             font-family: ${googleSansFont} !important;
         }
@@ -544,17 +544,17 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    'mdBook': `
+    mdBook: `
 
         html, body, input, textarea, select, h1, h2, h3, h4, h5, h6, b, strong{
             font-family: ${googleSansFont} !important;
-        }    
+        }
 
         code, pre, .ace_editor{
             font-family: ${globalMonoFont} !important;
         }
     `,
-    'gin-gonic.com': `
+    "gin-gonic.com": `
         html, body {
             font-family: ${globalSansFont} !important;
         }
@@ -563,183 +563,226 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    'vuejs.org': `
+    "vuejs.org": `
     pre, code, kbd, samp{
         font-family: ${globalMonoFont} !important;
     }
-    `
+    `,
+    "typescriptlang.org": `
+    html{
+        --body-font: ${globalSansFont} !important;
+    }
+    `,
+};
 
-
-}
 
 let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": "github.com",
-    "style": ["github"]
-}, {
+    "style": ["github"],
+},
+{
     "mode": "HOST-SUFFIX",
-    "domains": /zhihu.com/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /notion.so/,
-    "style": ["notion"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /bilibili.com/,
-    "style": ["bilibili"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /googlesource.com/,
-    "style": ["googleSource"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /google.com/,
-    "style": ["google"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /youtube.com/,
-    "style": ["youtube"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /flutter.dev/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /chaoxing.com/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /dev.to/,
-    "style": ["dev.to"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /medium.com/,
-    "style": ["medium"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /reddit.com/,
-    "style": ["reddit"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /juejin.cn/,
-    "style": ["juejin"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /tauri.app/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /quora.com/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /vuejs.org/,
-    "style": ["vuejs.org"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /mybatis.org/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /grpc.io/,
-    "style": ["general", "grpc.io"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /python.org/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /developer.chrome.com/,
-    "style": ["developer.chrome.com"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /web.dev/,
-    "style": ["web.dev"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /developer.android.com/,
-    "style": ["developer.android.com"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": "huggingface.co",
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /ithome.com/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /google.github.io/,
-    "style": ["mdBook"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /doc.rust-lang.org/,
-    "style": ["general"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /www.infoq.cn/,
-    "style": ["infoq.cn"]
-}, {
-    "mode": "HOST-SUFFIX",
-    "domains": /www.pixiv.net/,
+    "domains": "zhihu.com",
     "style": ["general"],
-    "lang": ['zh-CN']
-}, {
+},
+{
     "mode": "HOST-SUFFIX",
-    "domains": /gin-gonic.com/,
-    "style": ["gin-gonic.com"]
-}, {
+    "domains": "notion.so",
+    "style": ["notion"],
+},
+{
     "mode": "HOST-SUFFIX",
-    "domains": /v2ex.com/,
-    "style": ["general"]
-}, {
+    "domains": "bilibili.com",
+    "style": ["bilibili"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "googlesource.com",
+    "style": ["googleSource"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "google.com",
+    "style": ["google"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "youtube.com",
+    "style": ["youtube"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "flutter.dev",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "chaoxing.com",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "dev.to",
+    "style": ["dev.to"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "medium.com",
+    "style": ["medium"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "reddit.com",
+    "style": ["reddit"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "juejin.cn",
+    "style": ["juejin"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "tauri.app",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "quora.com",
+    "style": ["general"],
+},
+{
     "mode": "HOST-SUFFIX",
     "domains": "vuejs.org",
-    "style": ["vuejs.org"]
-}, {
+    "style": ["vuejs.org"],
+},
+{
     "mode": "HOST-SUFFIX",
-    "domains": /d2l.ai/,
-    "style": ["general"]
-}, {
+    "domains": "mybatis.org",
+    "style": ["general"],
+},
+{
     "mode": "HOST-SUFFIX",
-    "domains": /course.rs/,
-    "style": ["mdBook"]
-}
-
-
-]
-
+    "domains": "grpc.io",
+    "style": ["general", "grpc.io"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "python.org",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "developer.chrome.com",
+    "style": ["developer.chrome.com"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "web.dev",
+    "style": ["web.dev"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "developer.android.com",
+    "style": ["developer.android.com"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "huggingface.co",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "ithome.com",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "google.github.io",
+    "style": ["mdBook"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "doc.rust-lang.org",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "www.infoq.cn",
+    "style": ["infoq.cn"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "www.pixiv.net",
+    "style": ["general"],
+    "lang": ["zh-CN"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "gin-gonic.com",
+    "style": ["gin-gonic.com"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "v2ex.com",
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": "vuejs.org",
+    "style": ["vuejs.org"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": ["d2l.ai"],
+    "style": ["general"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": ["course.rs"],
+    "style": ["mdBook"],
+},
+{
+    "mode": "HOST-SUFFIX",
+    "domains": ["www.typescriptlang.org"],
+    "style": ["typescriptlang.org"]
+}];
 
 let style = "";
 
 // using filter
 // filter the correspondent rule list
-let filteredList = rulesList.filter(item => {
-
+let filteredList = rulesList.filter((item) => {
     // if the rule has a "lang" property
     // and the "lang" property doesn't contain current language => skip
 
-    if (item?.lang !== undefined && !item.lang.includes(lang)) {
-        console.log("language not match, skip this rule")
-        return false
-    }
+    let result = true;
+
+
 
     if (item.mode === "HOST-SUFFIX") {
         if (item.domains instanceof RegExp) {
-            return item.domains.test(domain)
+            result = item.domains.test(domain);
         } else {
-            return domain.endsWith(item.domains)
+            result = domain.endsWith(item.domains);
         }
     }
-})
 
-filteredList.forEach(({ style: keyIndeces }) => {
-    keyIndeces.forEach(key => {
-        style += styleList[key]
-    })
-})
+    if (result === true && item?.lang !== undefined && !item.lang.includes(lang)) {
+        console.log("language not match, skip this rule");
+        result = false;
+    }
+    return result;
+});
 
+filteredList.forEach(({ "style": keyIndeces }) => {
+    keyIndeces.forEach((key) => {
+        style += styleList[key];
+    });
+});
+
+
+console.timeEnd()
 
 let css = document.createElement("style");
 let text = document.createTextNode(style);
