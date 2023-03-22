@@ -42,10 +42,10 @@
 32. [d2l.ai](https://d2l.ai)
 33. [course.rs](https://course.rs)
 34. [TypeScriptlang.org](https://www.typescriptlang.org)
+35. [authing.cn](https://authing.cn)
+
 ## 请特别关注
 
 1. 你需要首先安装 Inter、Google Sans Text、思源黑体、MiSans 等字体，才能看到效果。
-
 2. 苹果平台下的 [Pixiv](https://www.pixiv.net/) 在简体中文环境下会错误调用日语字体，导致部分字符的字形不正确。所以 Pixiv 的策略仅在简体中文（zh-CN）环境下生效。
-
 3. [Comprehensive Rust](https://google.github.io/comprehensive-rust/) 与 [course.rs](https://course.rs) 都采用了 [mdBook](https://github.com/rust-lang/mdBook) 来构建在线书籍，所以可以使用相同的 CSS 代码。

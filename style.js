@@ -39,6 +39,7 @@
 // @match        https://*.d2l.ai/*
 // @match        https://course.rs/*
 // @match        https://*.typescriptlang.org/*
+// @match        https://*.authing.cn/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -517,6 +518,7 @@ let styleList = {
 
     `,
 
+
     "web.dev": `
         body{
             font-family: ${googleSansFont} !important;
@@ -573,6 +575,15 @@ let styleList = {
         --body-font: ${globalSansFont} !important;
     }
     `,
+    "authing.cn": `
+    body{
+        font-family: ${globalSansFont} !important;
+    }
+    
+    .styles_equityContainer__12r1u .styles_contextContainer__24onK .styles_contextText__3_t3U{
+        font-family: ${globalSansFont} !important;
+    }
+    `
 };
 
 
@@ -746,6 +757,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["www.typescriptlang.org"],
     "style": ["typescriptlang.org"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["authing.cn"],
+    "style": ["authing.cn"]
 }];
 
 let style = "";
