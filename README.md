@@ -43,6 +43,7 @@
 33. [course.rs](https://course.rs)
 34. [TypeScriptlang.org](https://www.typescriptlang.org)
 35. [authing.cn](https://authing.cn)
+36. [Go 语言圣经](https://gopl-zh.github.io)
 
 ## 请特别关注
 

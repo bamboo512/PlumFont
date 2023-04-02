@@ -40,6 +40,7 @@
 // @match        https://course.rs/*
 // @match        https://*.typescriptlang.org/*
 // @match        https://*.authing.cn/*
+// @match        https://gopl-zh.github.io/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -66,6 +67,19 @@ function judgeLanguage() {
         lang = window.navigator.language;
     }
 }
+function judgePlatform() {
+    let platform = "Not known";
+    if (navigator.appVersion.indexOf("Win") != -1) platform =
+        "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) platform =
+        "macOS";
+    if (navigator.appVersion.indexOf("X11") != -1) platform =
+        "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) platform =
+        "Linux";
+    return platform;
+}
+
 judgeLanguage();
 
 let styleList = {
@@ -555,6 +569,10 @@ let styleList = {
         code, pre, .ace_editor{
             font-family: ${globalMonoFont} !important;
         }
+
+        .menu-title{
+            font-weight: 400;
+        }
     `,
     "gin-gonic.com": `
         html, body {
@@ -761,6 +779,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["authing.cn"],
     "style": ["authing.cn"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["gopl-zh.github.io"],
+    "style": ["mdBook"]
 }];
 
 let style = "";
