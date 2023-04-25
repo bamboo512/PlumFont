@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         梅花 - 更改网页默认显示字体
-// @version      1.0.4
+// @version      1.0.6
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -41,6 +41,8 @@
 // @match        https://*.typescriptlang.org/*
 // @match        https://*.authing.cn/*
 // @match        https://gopl-zh.github.io/*
+// @match        https://go.dev/*
+// @match        https://typeorm.io/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -601,7 +603,24 @@ let styleList = {
     .styles_equityContainer__12r1u .styles_contextContainer__24onK .styles_contextText__3_t3U{
         font-family: ${globalSansFont} !important;
     }
-    `
+    `,
+    "go.dev": `
+    body,html{
+        font-family: ${globalSansFont} !important;
+    }
+    pre,code{
+        font-family: ${globalMonoFont} !important;
+    }
+    `,
+    "typeorm.io": `
+        h1, h2, h3{
+            font-family: ${globalSansFont} !important;
+        }
+        
+        code[class*="language-"], pre[class*="language-"]{
+            font-family: ${globalMonoFont} !important;
+    }
+    `,
 };
 
 
@@ -783,6 +802,14 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["gopl-zh.github.io"],
     "style": ["mdBook"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["go.dev"],
+    "style": ["go.dev"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["typeorm.io"],
+    "style": ["typeorm.io"]
 }];
 
 let style = "";
