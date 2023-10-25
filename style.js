@@ -43,6 +43,9 @@
 // @match        https://gopl-zh.github.io/*
 // @match        https://go.dev/*
 // @match        https://typeorm.io/*
+// @match        https://gorm.io/*
+// @match        http://fxshu.top/*
+// @match        http://fxshw.cc/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -621,6 +624,26 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
     }
     `,
+    "gorm.io": `
+        .article-title{
+            font-family: ${globalSansFont} !important;
+        }
+        body{
+            font-family: ${globalSansFont} !important;
+        }
+
+        pre,code{
+            font-family: ${globalMonoFont} !important;
+        }
+
+        .sidebar-title, .sidebar-link, .toc-link{
+            font-family: ${globalSansFont} !important;
+        }
+
+        .main-nav-link{
+            font-family: ${googleSansFont} !important;
+        }
+    `
 };
 
 
@@ -810,6 +833,14 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["typeorm.io"],
     "style": ["typeorm.io"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["gorm.io"],
+    "style": ["gorm.io"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["fxshu.top", "fuxsw.cc"],
+    "style": ["general"]
 }];
 
 let style = "";

@@ -46,6 +46,9 @@
 36. [Go 语言圣经](https://gopl-zh.github.io)
 37. [A Tour of Go](https://go.dev)
 38. [typeorm.io](https://typeorm.io)
+39. [gorm.io](https://gorm.io)
+40. [fxshu.top](http://fxshu.top)
+41. [fuxsw.cc](http://fuxsw.cc)
 
 ## 请特别关注
 
