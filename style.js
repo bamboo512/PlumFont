@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         梅花 - 更改网页默认显示字体
-// @version      1.0.6
+// @version      1.0.7
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -10,7 +10,7 @@
 // @match        https://*.bilibili.com/*
 // @match        https://*.googlesource.com/*
 // @match        https://*.google.com/*
-// @match        https://*.google.com.hk/*
+// @match        https://*.google.com.*/*
 // @match        https://*.python.org/*
 // @match        https://*.youtube.com/*
 // @match        https://docs.flutter.dev/*
@@ -46,6 +46,7 @@
 // @match        https://gorm.io/*
 // @match        http://fxshu.top/*
 // @match        http://fxshw.cc/*
+// @match        https://*.cloudflare.com/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -602,7 +603,7 @@ let styleList = {
     body{
         font-family: ${globalSansFont} !important;
     }
-    
+
     .styles_equityContainer__12r1u .styles_contextContainer__24onK .styles_contextText__3_t3U{
         font-family: ${globalSansFont} !important;
     }
@@ -619,7 +620,7 @@ let styleList = {
         h1, h2, h3{
             font-family: ${globalSansFont} !important;
         }
-        
+
         code[class*="language-"], pre[class*="language-"]{
             font-family: ${globalMonoFont} !important;
     }
@@ -642,6 +643,47 @@ let styleList = {
 
         .main-nav-link{
             font-family: ${googleSansFont} !important;
+        }
+    `,
+    "cloudflare.com": `
+        body, button{
+            font-family: ${globalSansFont} !important;
+        }
+
+        code, pre {
+            font-family: ${globalMonoFont} !important;
+        }
+
+
+        .c_ei, .c_eo {
+            font-family: ${globalSansFont} !important;
+        }
+
+        .c_oi {
+            font-family: ${globalMonoFont} !important;
+        }
+
+        /* workers editor window - bottom bar */
+        .windows {
+            font-family: ${globalSansFont} !important;
+        }
+
+
+        /* Workders Editor: 下面修改的字体并未生效 */
+
+        /* workders editor window - left bar (code line number) */
+        .margin-view-overlays{
+            font-family: ${globalMonoFont} !important;
+        }
+
+        /* workers editor window - code */
+        .view-lines.monaco-mouse-cursor-text {
+            font-family: ${globalMonoFont} !important;
+        }
+        .editor-instance{
+            --testMessageDecorationFontFamily: ${globalMonoFont} !important;
+            --code-editorInlayHintsFontFamily: ${globalMonoFont} !important;
+
         }
     `
 };
@@ -674,7 +716,7 @@ let rulesList = [{
 },
 {
     "mode": "HOST-SUFFIX",
-    "domains": "google.com",
+    "domains": ["google.com", "google.com.hk", "google.com.jp", "google.com.tw", "google.com.sg", "google.com.kr", "google.com.au"],
     "style": ["google"],
 },
 {
@@ -841,6 +883,10 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["fxshu.top", "fuxsw.cc"],
     "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["cloudflare.com"],
+    "style": ["cloudflare.com"]
 }];
 
 let style = "";
