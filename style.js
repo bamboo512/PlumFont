@@ -47,6 +47,7 @@
 // @match        http://fxshu.top/*
 // @match        http://fxshw.cc/*
 // @match        https://*.cloudflare.com/*
+// @match        https://*.loro.dev/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -202,8 +203,6 @@ let styleList = {
         .e9EfHf{
             font-family: ${googleSansFont} !important;
         }
-
-
 
         /* Settings */
         .q0yked{
@@ -887,7 +886,12 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["cloudflare.com"],
     "style": ["cloudflare.com"]
-}];
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["loro.dev"],
+    "style": ["general"]
+}
+];
 
 let style = "";
 
