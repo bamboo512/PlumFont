@@ -48,6 +48,7 @@
 // @match        http://fxshw.cc/*
 // @match        https://*.cloudflare.com/*
 // @match        https://*.loro.dev/*
+// @match        https://www.upwork.com/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -684,7 +685,13 @@ let styleList = {
             --code-editorInlayHintsFontFamily: ${globalMonoFont} !important;
 
         }
-    `
+    `,
+    "upwork.com": `
+        :root {
+            --font-family-base: ${globalSansFont} !important;
+            --font-family-monospace: ${globalMonoFont} !important;
+        }
+    `,
 };
 
 
@@ -890,6 +897,11 @@ let rulesList = [{
     "mode": "HOST-SUFFIX",
     "domains": ["loro.dev"],
     "style": ["general"]
+}, {
+    "mode": "HOST-SUFFIX",
+    "domains": ["upwork.com"],
+    "style": ["upwork.com"]
+
 }
 ];
 

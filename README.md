@@ -51,6 +51,8 @@
 41. [fuxsw.cc](http://fuxsw.cc)
 42. [Cloudflare](https://cloudflare.com)
 43. [Loro](https://www.loro.dev)
+44. [Upwork](https://www.upwork.com)
+45. 
 
 ## 请特别关注
 
