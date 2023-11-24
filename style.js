@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         梅花 - 更改网页默认显示字体
-// @version      1.0.7
+// @version      1.0.8
 // @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author       Fibert Loyee
 // @run-at       document-start
@@ -125,42 +125,47 @@ let styleList = {
             font-family:${googleSansFont};
         }
         div {
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
         }
 
         /* 首页 - 视频标题 */
         .bili-video-card .bili-video-card__info--tit>a {
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
         }
 
         /*  视频标题  */
         .video-info-v1 .video-title{
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
         }
 
         /* ‘评论’ 标题 */
         .reply-header .reply-navigation .nav-bar .nav-title .nav-title-text[data-v-4ccb5ad5]{
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
         }
 
         /*  评论数字计数和评论内容  */
         .bili-comment.browser-pc *{
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
         }
 
         /* 视频详情页 - 右侧推荐视频标题 */
         .video-page-card-small .card-box .info .title{
-            font-family:  ${googleSansFont} !important
+            font-family:  ${googleSansFont} !important;
+        }
+
+        /* 视频字幕 */
+        .bpx-player-subtitle-panel-text{
+            font-family: ${googleSansFont} !important;
         }
 
         `,
     googleSource: `
         .u-monospace {
-            font-family: ${globalMonoFont};
+            font-family: ${globalMonoFont} !important;
         }
 
         .Site {
-            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Google Sans Text","Inter", "Segoe UI Variable Display","Apple Color Emoji", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"!important
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Google Sans Text","Inter", "Segoe UI Variable Display","Apple Color Emoji", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"!important;
         } `,
     google: `
         .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std{
@@ -905,7 +910,7 @@ let rulesList = [{
 }
 ];
 
-let style = "";
+
 
 // using filter
 // filter the correspondent rule list
@@ -920,8 +925,10 @@ let filteredList = rulesList.filter((item) => {
     if (item.mode === "HOST-SUFFIX") {
         if (item.domains instanceof RegExp) {
             result = item.domains.test(domain);
-        } else {
+        } else if (item.domains instanceof String) {
             result = domain.endsWith(item.domains);
+        } else if (item.domains instanceof Array) {
+            result = item.domains.some((domain) => domain.endsWith(item.domains));
         }
     }
 
@@ -932,12 +939,10 @@ let filteredList = rulesList.filter((item) => {
     return result;
 });
 
-filteredList.forEach(({ "style": keyIndeces }) => {
-    keyIndeces.forEach((key) => {
-        style += styleList[key];
-    });
-});
 
+const style = filteredList
+    .flatMap(({ style: keyIndices }) => keyIndices.map(key => styleList[key]))
+    .join('\n');
 
 console.timeEnd()
 
