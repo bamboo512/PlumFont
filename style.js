@@ -49,6 +49,7 @@
 // @match        https://*.cloudflare.com/*
 // @match        https://*.loro.dev/*
 // @match        https://www.upwork.com/*
+// @match        https://stackoverflow.com/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -62,6 +63,7 @@ let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter",
 let googleSansFont = `'Google Sans Text',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleSansDisplayFont = `'Google Sans','Google Sans Display',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono","Roboto Mono",ui-monospace, monospace`;
+let globalSerifFont = `ui-serif, "New York","Noto Serif","思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
 
 let domain = window.location.host;
 console.log(domain);
@@ -696,6 +698,14 @@ let styleList = {
             --font-family-monospace: ${globalMonoFont} !important;
         }
     `,
+    "stackoverflow": `
+    
+    html, body{
+        --ff-sans: ${globalSansFont} !important;
+        --ff-mono: ${globalMonoFont} !important;
+        --ff-serif: ${globalSerifFont} !important;
+    }
+    `
 };
 
 
@@ -862,6 +872,9 @@ let rulesList = [{
 }, {
     "domains": ["upwork.com"],
     "style": ["upwork.com"]
+}, {
+    "domains": ["stackoverflow.com"],
+    "style": ["stackoverflow"]
 }
 ];
 
