@@ -1,55 +1,83 @@
 // ==UserScript==
-// @name         梅花 - 更改网页默认显示字体
-// @version      1.0.9
-// @description  将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
-// @author       Fibert Loyee
-// @run-at       document-start
-// @match        https://*.zhihu.com/*
-// @match        https://*github.com/*
-// @match        https://www.notion.so/*
-// @match        https://*.bilibili.com/*
-// @match        https://*.googlesource.com/*
-// @match        https://*.google.com/*
-// @match        https://*.google.com.*/*
-// @match        https://*.python.org/*
-// @match        https://*.youtube.com/*
-// @match        https://docs.flutter.dev/*
-// @match        https://*.chaoxing.com/*
-// @match        https://dev.to/*
-// @match        https://medium.com/*
-// @match        https://www.reddit.com/*
-// @match        https://juejin.cn/*
-// @match        https://tauri.app/*
-// @match        https://www.quora.com/*
-// @match        https://vuejs.org/*
-// @match        https://mybatis.org/*
-// @match        https://grpc.io/*
-// @match        https://*.chrome.com/*
-// @match        https://web.dev/*
-// @match        https://developer.android.com/*
-// @match        https://huggingface.co/*
-// @match        https://www.ithome.com/*
-// @match        https://google.github.io/*
-// @match        https://doc.rust-lang.org/*
-// @match        https://www.infoq.cn/*
-// @match        https://www.pixiv.net/*
-// @match        https://gin-gonic.com/*
-// @match        https://v2ex.com/*
-// @match        https://*.vuejs.org/*
-// @match        https://*.d2l.ai/*
-// @match        https://course.rs/*
-// @match        https://*.typescriptlang.org/*
-// @match        https://*.authing.cn/*
-// @match        https://gopl-zh.github.io/*
-// @match        https://go.dev/*
-// @match        https://typeorm.io/*
-// @match        https://gorm.io/*
-// @match        http://fxshu.top/*
-// @match        http://fxshw.cc/*
-// @match        https://*.cloudflare.com/*
-// @match        https://*.loro.dev/*
-// @match        https://www.upwork.com/*
-// @match        https://stackoverflow.com/*
+// @name            PlumFont - Replace Roboto, Segoe UI, Arial, and other fonts
+// @name:en         PlumFont - Replace Roboto, Segoe UI, Arial, and other fonts
+// @name:zh-CN      梅花 - 替换掉 Roboto、Segoe UI 等字体
+// @name:zh-TW      梅花 - 替換掉 Roboto、Segoe UI 等字體
+// @name:zh-HK      梅花 - 替換掉 Roboto、Segoe UI 等字體
+// @name:zh-MO      梅花 - 替換掉 Roboto、Segoe UI 等字體
+// @name:zh-SG      梅花 - 替换掉 Roboto、Segoe UI 等字体
+// @name:zh         梅花 - 替换掉 Roboto、Segoe UI 等字体
+// @name:ja         梅花 - Roboto、Segoe UI などのフォントを置き換える
+// @name:ko         PlumFont - Roboto, Segoe UI, Arial 및 기타 글꼴 교체
+// @name:ru         PlumFont - заменить Roboto, Segoe UI, Arial и другие шрифты
+// @name:de         PlumFont - Ersetzen Sie Roboto, Segoe UI, Arial und andere Schriftarten
+// @name:fr         PlumFont - Remplacez Roboto, Segoe UI, Arial et autres polices
+// @name:es         PlumFont - Reemplace Roboto, Segoe UI, Arial y otras fuentes
+// @name:it         PlumFont - Sostituisci Roboto, Segoe UI, Arial e altri font
+// @name:pt         PlumFont - Substitua Roboto, Segoe UI, Arial e outras fontes
+// @name:vi         PlumFont - Thay thế Roboto, Segoe UI, Arial và các phông chữ khác
+// @name:tr         PlumFont - Roboto, Segoe UI, Arial ve diğer yazı tiplerini değiştirin
+// @name:ar         PlumFont - استبدل Roboto و Segoe UI و Arial والخطوط الأخرى
+// @name:uk         PlumFont - замінити Roboto, Segoe UI, Arial та інші шрифти
+// @name:hi         PlumFont - Roboto, Segoe UI, Arial और अन्य फ़ॉन्ट बदलें
+// @name:bn         PlumFont - Roboto, Segoe UI, Arial এবং অন্যান্য ফন্ট পরিবর্তন করুন
+// @name:ms         PlumFont - Ganti Roboto, Segoe UI, Arial dan fon lain
+// @name:id         PlumFont - Ganti Roboto, Segoe UI, Arial, dan font lainnya
+// @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
+// @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
+
+
+// @version         1.1.0
+// @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
+// @author          Fibert Loyee
+// @run-at          document-start
+// @match           https://*.zhihu.com/*
+// @match           https://*github.com/*
+// @match           https://www.notion.so/*
+// @match           https://*.bilibili.com/*
+// @match           https://*.googlesource.com/*
+// @match           https://*.google.com/*
+// @match           https://*.google.com.*/*
+// @match           https://*.python.org/*
+// @match           https://*.youtube.com/*
+// @match           https://docs.flutter.dev/*
+// @match           https://*.chaoxing.com/*
+// @match           https://dev.to/*
+// @match           https://medium.com/*
+// @match           https://www.reddit.com/*
+// @match           https://juejin.cn/*
+// @match           https://tauri.app/*
+// @match           https://www.quora.com/*
+// @match           https://vuejs.org/*
+// @match           https://mybatis.org/*
+// @match           https://grpc.io/*
+// @match           https://*.chrome.com/*
+// @match           https://web.dev/*
+// @match           https://developer.android.com/*
+// @match           https://huggingface.co/*
+// @match           https://www.ithome.com/*
+// @match           https://google.github.io/*
+// @match           https://doc.rust-lang.org/*
+// @match           https://www.infoq.cn/*
+// @match           https://www.pixiv.net/*
+// @match           https://gin-gonic.com/*
+// @match           https://v2ex.com/*
+// @match           https://*.vuejs.org/*
+// @match           https://*.d2l.ai/*
+// @match           https://course.rs/*
+// @match           https://*.typescriptlang.org/*
+// @match           https://*.authing.cn/*
+// @match           https://gopl-zh.github.io/*
+// @match           https://go.dev/*
+// @match           https://typeorm.io/*
+// @match           https://gorm.io/*
+// @match           http://fxshu.top/*
+// @match           http://fxshw.cc/*
+// @match           https://*.cloudflare.com/*
+// @match           https://*.loro.dev/*
+// @match           https://www.upwork.com/*
+// @match           https://stackoverflow.com/*
+// @match           https://*.gofiber.io/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -699,13 +727,25 @@ let styleList = {
         }
     `,
     "stackoverflow": `
-    
+
     html, body{
         --ff-sans: ${globalSansFont} !important;
         --ff-mono: ${globalMonoFont} !important;
         --ff-serif: ${globalSerifFont} !important;
     }
-    `
+    `,
+    "gofiber.io": `
+        :root {
+                --ifm-font-family-base: ${globalSansFont} !important;
+                --ifm-font-family-monospace: ${globalMonoFont} !important;
+        }
+        body {
+            font: 16px/1.6 ${globalSansFont} !important;
+        }
+        input {
+            font-family: ${globalSansFont} !important;
+        }
+  `
 };
 
 
@@ -875,6 +915,9 @@ let rulesList = [{
 }, {
     "domains": ["stackoverflow.com"],
     "style": ["stackoverflow"]
+}, {
+    "domains": ["gofiber.io"],
+    "style": ["gofiber.io"]
 }
 ];
 
