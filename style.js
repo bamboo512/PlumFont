@@ -27,7 +27,7 @@
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
 
-// @version         1.1.0
+// @version         1.1.1
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -87,11 +87,11 @@
 
 
 let globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
-let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansFont = `'Google Sans Text',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansDisplayFont = `'Google Sans','Google Sans Display',"Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono","Roboto Mono",ui-monospace, monospace`;
-let globalSerifFont = `ui-serif, "New York","Noto Serif","思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
+let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansFont = `'Google Sans Text',"Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansDisplayFont = `'Google Sans','Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, monospace`;
+let globalSerifFont = `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
 
 let domain = window.location.host;
 console.log(domain);
@@ -227,6 +227,14 @@ let styleList = {
         font-family: ${googleSansFont} !important;
         }
 
+        /* Search Bar */
+        textarea {
+            font-family: ${googleSansFont} !important;
+        }
+
+        .gb_Ed{
+            font-family: ${googleSansFont} !important;
+        }
 
         /* Search ToolBar */
         .GLcBOb{
