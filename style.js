@@ -26,8 +26,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-
-// @version         1.1.1
+// @version         1.1.2
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -78,6 +77,7 @@
 // @match           https://www.upwork.com/*
 // @match           https://stackoverflow.com/*
 // @match           https://*.gofiber.io/*
+// @match           https://*newsminimalist.com/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -85,13 +85,18 @@
 
 // ==/UserScript==
 
-
-let globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
-let globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansFont = `'Google Sans Text',"Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansDisplayFont = `'Google Sans','Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, monospace`;
-let globalSerifFont = `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
+let globalMonoFont =
+    `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
+let globalSansFont =
+    `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansFont =
+    `'Google Sans Text',"Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleSansDisplayFont =
+    `'Google Sans','Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+let googleMonoFont =
+    `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, monospace`;
+let globalSerifFont =
+    `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
 
 let domain = window.location.host;
 console.log(domain);
@@ -106,14 +111,10 @@ function judgeLanguage() {
 }
 function judgePlatform() {
     let platform = "Not known";
-    if (navigator.appVersion.indexOf("Win") != -1) platform =
-        "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) platform =
-        "macOS";
-    if (navigator.appVersion.indexOf("X11") != -1) platform =
-        "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) platform =
-        "Linux";
+    if (navigator.appVersion.indexOf("Win") != -1) platform = "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) platform = "macOS";
+    if (navigator.appVersion.indexOf("X11") != -1) platform = "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) platform = "Linux";
     return platform;
 }
 
@@ -580,7 +581,6 @@ let styleList = {
 
     `,
 
-
     "web.dev": `
         body{
             font-family: ${googleSansFont} !important;
@@ -753,187 +753,160 @@ let styleList = {
         input {
             font-family: ${globalSansFont} !important;
         }
-  `
+  `,
 };
-
 
 let rulesList = [{
     "domains": "github.com",
     "style": ["github"],
-},
-{
+}, {
     "domains": "zhihu.com",
     "style": ["general"],
-},
-{
+}, {
     "domains": "notion.so",
     "style": ["notion"],
-},
-{
+}, {
     "domains": "bilibili.com",
     "style": ["bilibili"],
-},
-{
+}, {
     "domains": "googlesource.com",
     "style": ["googleSource"],
-},
-{
-    "domains": ["google.com", "google.com.hk", "google.com.jp", "google.com.tw", "google.com.sg", "google.com.kr", "google.com.au"],
+}, {
+    "domains": [
+        "google.com",
+        "google.com.hk",
+        "google.com.jp",
+        "google.com.tw",
+        "google.com.sg",
+        "google.com.kr",
+        "google.com.au",
+    ],
     "style": ["google"],
-},
-{
+}, {
     "domains": "youtube.com",
     "style": ["youtube"],
-},
-{
+}, {
     "domains": "flutter.dev",
     "style": ["general"],
-},
-{
+}, {
     "domains": "chaoxing.com",
     "style": ["general"],
-},
-{
+}, {
     "domains": "dev.to",
     "style": ["dev.to"],
-},
-{
+}, {
     "domains": "medium.com",
     "style": ["medium"],
-},
-{
+}, {
     "domains": "reddit.com",
     "style": ["reddit"],
-},
-{
+}, {
     "domains": "juejin.cn",
     "style": ["juejin"],
-},
-{
+}, {
     "domains": "tauri.app",
     "style": ["general"],
-},
-{
+}, {
     "domains": "quora.com",
     "style": ["general"],
-},
-{
+}, {
     "domains": "vuejs.org",
     "style": ["vuejs.org"],
-},
-{
+}, {
     "domains": "mybatis.org",
     "style": ["general"],
-},
-{
+}, {
     "domains": "grpc.io",
     "style": ["general", "grpc.io"],
-},
-{
+}, {
     "domains": "python.org",
     "style": ["general"],
-},
-{
+}, {
     "domains": "developer.chrome.com",
     "style": ["developer.chrome.com"],
-},
-{
+}, {
     "domains": "web.dev",
     "style": ["web.dev"],
-},
-{
+}, {
     "domains": "developer.android.com",
     "style": ["developer.android.com"],
-},
-{
+}, {
     "domains": "huggingface.co",
     "style": ["general"],
-},
-{
+}, {
     "domains": "ithome.com",
     "style": ["general"],
-},
-{
+}, {
     "domains": "google.github.io",
     "style": ["mdBook"],
-},
-{
+}, {
     "domains": "doc.rust-lang.org",
     "style": ["general"],
-},
-{
+}, {
     "domains": "www.infoq.cn",
     "style": ["infoq.cn"],
-},
-{
+}, {
     "domains": "www.pixiv.net",
     "style": ["general"],
     "lang": ["zh-CN"],
-},
-{
+}, {
     "domains": "gin-gonic.com",
     "style": ["gin-gonic.com"],
-},
-{
+}, {
     "domains": "v2ex.com",
     "style": ["general"],
-},
-{
+}, {
     "domains": "vuejs.org",
     "style": ["vuejs.org"],
-},
-{
+}, {
     "domains": ["d2l.ai"],
     "style": ["general"],
-},
-{
+}, {
     "domains": ["course.rs"],
     "style": ["mdBook"],
-},
-{
+}, {
     "domains": ["www.typescriptlang.org"],
-    "style": ["typescriptlang.org"]
+    "style": ["typescriptlang.org"],
 }, {
     "domains": ["authing.cn"],
-    "style": ["authing.cn"]
+    "style": ["authing.cn"],
 }, {
     "domains": ["gopl-zh.github.io"],
-    "style": ["mdBook"]
+    "style": ["mdBook"],
 }, {
     "domains": ["go.dev"],
-    "style": ["go.dev"]
+    "style": ["go.dev"],
 }, {
     "domains": ["typeorm.io"],
-    "style": ["typeorm.io"]
+    "style": ["typeorm.io"],
 }, {
     "domains": ["gorm.io"],
-    "style": ["gorm.io"]
+    "style": ["gorm.io"],
 }, {
     "domains": ["fxshu.top", "fuxsw.cc"],
-    "style": ["general"]
+    "style": ["general"],
 }, {
     "domains": ["cloudflare.com"],
-    "style": ["cloudflare.com"]
+    "style": ["cloudflare.com"],
 }, {
     "domains": ["loro.dev"],
-    "style": ["general"]
+    "style": ["general"],
 }, {
     "domains": ["upwork.com"],
-    "style": ["upwork.com"]
+    "style": ["upwork.com"],
 }, {
     "domains": ["stackoverflow.com"],
-    "style": ["stackoverflow"]
+    "style": ["stackoverflow"],
 }, {
     "domains": ["gofiber.io"],
-    "style": ["gofiber.io"]
-}
-];
-
-
+    "style": ["gofiber.io"],
+}, {
+    "domains": ["newsminimalist.com"],
+    "style": ["general"],
+}];
 
 // using filter to find the matched rule
 let filteredList = rulesList.filter(({ domains, lang }) => {
-
     let isMatch = true;
 
     if (domains instanceof RegExp) {
@@ -956,8 +929,8 @@ let filteredList = rulesList.filter(({ domains, lang }) => {
 });
 
 const style = filteredList
-    .flatMap(({ style: keyIndices }) => keyIndices.map(key => styleList[key]))
-    .join('\n');
+    .flatMap(({ style: keyIndices }) => keyIndices.map((key) => styleList[key]))
+    .join("\n");
 
 let css = document.createElement("style");
 let text = document.createTextNode(style);
