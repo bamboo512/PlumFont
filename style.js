@@ -26,7 +26,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-// @version         1.1.2
+// @version         1.1.3
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -523,14 +523,14 @@ let styleList = {
             `,
 
     "dev.to": `
-        html,body,dev{
-
-            font-family:  ${globalSansFont} !important;
-
+        
+        :root{
+            --ff-sans-serif: ${globalSansFont} !important;
+            --ff-monospace: ${globalMonoFont} !important;
+            --ff-serif: ${globalSerifFont} !important;
         }
-        .text-styles{
-            font-family: ${globalSansFont} !important;
-        } `,
+
+        `,
     "medium": `
         .a,.bv,.bc {
             font-family:${globalSansFont} !important;
