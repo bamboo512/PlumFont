@@ -523,7 +523,7 @@ let styleList = {
             `,
 
     "dev.to": `
-        
+
         :root{
             --ff-sans-serif: ${globalSansFont} !important;
             --ff-monospace: ${globalMonoFont} !important;
@@ -609,18 +609,21 @@ let styleList = {
         }
     `,
     "mdBook": `
-
-        html, body, input, textarea, select, h1, h2, h3, h4, h5, h6, b, strong{
+        .fa {
+            font-family: FontAwesome !important;
+        }
+        html, body, input, textarea, select, h1, h2, h3, h4, h5, h6, b, strong {
             font-family: ${googleSansFont} !important;
         }
 
-        code, pre, .ace_editor{
+        code, pre, .ace_editor {
             font-family: ${globalMonoFont} !important;
         }
 
-        .menu-title{
+        .menu-title {
             font-weight: 400;
         }
+
     `,
     "gin-gonic.com": `
         html, body {
@@ -841,7 +844,7 @@ let rulesList = [{
     "style": ["mdBook"],
 }, {
     "domains": "doc.rust-lang.org",
-    "style": ["general"],
+    "style": ["mdBook"],
 }, {
     "domains": "www.infoq.cn",
     "style": ["infoq.cn"],
