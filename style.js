@@ -78,10 +78,12 @@
 // @match           https://stackoverflow.com/*
 // @match           https://*.gofiber.io/*
 // @match           https://*newsminimalist.com/*
+// @match           https://*.tauri.app/*
+// @match           https://*.vuejs.org/*
 
 // @namespace    PlumFont
 // @license      MIT
-// @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js// @match        https://*.vuejs.org/*
+// @downloadURL  https://raw.githubusercontent.com/bamboo512/PlumFont/main/style.js
 
 // ==/UserScript==
 
@@ -757,6 +759,12 @@ let styleList = {
             font-family: ${globalSansFont} !important;
         }
   `,
+    "tauri.app": `{
+        :root {
+            --__sl-font-system: ${globalSansFont} !important;
+            --__sl-font-system-mono: ${globalMonoFont} !important;
+        }
+  }`,
 };
 
 let rulesList = [{
@@ -906,6 +914,9 @@ let rulesList = [{
 }, {
     "domains": ["newsminimalist.com"],
     "style": ["general"],
+}, {
+    "domains": ["tauri.app"],
+    "style": ["tauri.app"],
 }];
 
 // using filter to find the matched rule
