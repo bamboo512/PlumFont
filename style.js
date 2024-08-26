@@ -26,7 +26,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-// @version         1.1.3
+// @version         1.1.4
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -88,7 +88,7 @@
 // ==/UserScript==
 
 let globalMonoFont =
-    `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", monospace`;
+    `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", "Noto Color Emoji", monospace`;
 let globalSansFont =
     `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleSansFont =
@@ -96,9 +96,9 @@ let googleSansFont =
 let googleSansDisplayFont =
     `'Google Sans','Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleMonoFont =
-    `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, monospace`;
+    `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, "Noto Color Emoji", monospace`;
 let globalSerifFont =
-    `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", serif`;
+    `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", "Noto Color Emoji", serif`;
 
 let domain = window.location.host;
 console.log(domain);
@@ -263,6 +263,10 @@ let styleList = {
         }
 
         .chr-copy {
+            font-family: ${googleSansFont} !important;
+        }
+
+        .ApHyTb{
             font-family: ${googleSansFont} !important;
         }
 
