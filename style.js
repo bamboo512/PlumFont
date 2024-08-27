@@ -26,7 +26,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-// @version         1.1.4
+// @version         1.1.5
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -92,9 +92,9 @@ let globalMonoFont =
 let globalSansFont =
     `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleSansFont =
-    `'Google Sans Text',"Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+    `'Google Sans Text', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleSansDisplayFont =
-    `'Google Sans','Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+    `'Google Sans', 'Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
 let googleMonoFont =
     `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, "Noto Color Emoji", monospace`;
 let globalSerifFont =
@@ -266,8 +266,12 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
 
-        .ApHyTb{
+        .ApHyTb, .iAIpCb, .ZFiwCf, .HJSKzf, .gb_M, .o6OF0 .HrUlUc, .o6OF0 .PnfqLc, .Vlt3wb, .vk_h, .vk_sh, .Uekwlc, .IFvyDb.hb8SAc, .IVvPP .zloOqf, #rhs .ss6qqb .zloOqf, .C0mf1d, .HmPpvd, .eUOBKb, .tNxQIb  {
             font-family: ${googleSansFont} !important;
+        }
+        
+        .IFnjPb, .pb3iw, .EyiEYb {
+            font-family: ${googleSansDisplayFont} !important;
         }
 
         `,
