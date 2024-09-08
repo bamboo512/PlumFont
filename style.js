@@ -266,10 +266,10 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
 
-        .ApHyTb, .iAIpCb, .ZFiwCf, .HJSKzf, .gb_M, .o6OF0 .HrUlUc, .o6OF0 .PnfqLc, .Vlt3wb, .vk_h, .vk_sh, .Uekwlc, .IFvyDb.hb8SAc, .IVvPP .zloOqf, #rhs .ss6qqb .zloOqf, .C0mf1d, .HmPpvd, .eUOBKb, .tNxQIb  {
+        .ApHyTb, .iAIpCb, .ZFiwCf, .HJSKzf, .gb_M, .o6OF0 .HrUlUc, .o6OF0 .PnfqLc, .Vlt3wb, .vk_h, .vk_sh, .Uekwlc, .IFvyDb.hb8SAc, .IVvPP .zloOqf, #rhs .ss6qqb .zloOqf, .C0mf1d, .HmPpvd, .eUOBKb, .tNxQIb, .gb_Da, .gb_Fd, .gb_0d:not(.gb_ne), .gb_L  {
             font-family: ${googleSansFont} !important;
         }
-        
+
         .IFnjPb, .pb3iw, .EyiEYb {
             font-family: ${googleSansDisplayFont} !important;
         }
