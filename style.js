@@ -26,7 +26,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-// @version         1.1.5
+// @version         1.1.6
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -79,7 +79,7 @@
 // @match           https://*.gofiber.io/*
 // @match           https://*newsminimalist.com/*
 // @match           https://*.tauri.app/*
-// @match           https://*.vuejs.org/*
+// @match           https://docs.rs/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -266,7 +266,7 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
 
-        .ApHyTb, .iAIpCb, .ZFiwCf, .HJSKzf, .gb_M, .o6OF0 .HrUlUc, .o6OF0 .PnfqLc, .Vlt3wb, .vk_h, .vk_sh, .Uekwlc, .IFvyDb.hb8SAc, .IVvPP .zloOqf, #rhs .ss6qqb .zloOqf, .C0mf1d, .HmPpvd, .eUOBKb, .tNxQIb, .gb_Da, .gb_Fd, .gb_0d:not(.gb_ne), .gb_L  {
+        .ApHyTb, .iAIpCb, .ZFiwCf, .HJSKzf, .gb_M, .o6OF0 .HrUlUc, .o6OF0 .PnfqLc, .Vlt3wb, .vk_h, .vk_sh, .Uekwlc, .IFvyDb.hb8SAc, .IVvPP .zloOqf, #rhs .ss6qqb .zloOqf, .C0mf1d, .HmPpvd, .eUOBKb, .tNxQIb, .gb_Da, .gb_Fd, .gb_0d:not(.gb_ne), .gb_L, .VwiC3b {
             font-family: ${googleSansFont} !important;
         }
 
@@ -773,6 +773,12 @@ let styleList = {
             --__sl-font-system-mono: ${globalMonoFont} !important;
         }
   }`,
+
+  "docs.rs": `
+        code, pre, .code-header {
+            font-family: ${globalMonoFont} !important;
+        }
+  `
 };
 
 let rulesList = [{
@@ -925,6 +931,9 @@ let rulesList = [{
 }, {
     "domains": ["tauri.app"],
     "style": ["tauri.app"],
+},{
+    "domains": ["docs.rs"],
+    "style": ["docs.rs"],
 }];
 
 // using filter to find the matched rule
