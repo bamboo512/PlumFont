@@ -1,12 +1,8 @@
 // ==UserScript==
 // @name            PlumFont - Replace Roboto, Segoe UI, Arial, and other fonts
 // @name:en         PlumFont - Replace Roboto, Segoe UI, Arial, and other fonts
-// @name:zh-CN      梅花 - 替换掉 Roboto、Segoe UI 等字体
-// @name:zh-TW      梅花 - 替換掉 Roboto、Segoe UI 等字體
-// @name:zh-HK      梅花 - 替換掉 Roboto、Segoe UI 等字體
-// @name:zh-MO      梅花 - 替換掉 Roboto、Segoe UI 等字體
-// @name:zh-SG      梅花 - 替换掉 Roboto、Segoe UI 等字体
-// @name:zh         梅花 - 替换掉 Roboto、Segoe UI 等字体
+// @name:zh-Hans    梅花 - 替换掉 Roboto、Segoe UI 等字体
+// @name:zh-Hant    梅花 - 替換掉 Roboto、Segoe UI 等字體
 // @name:ja         梅花 - Roboto、Segoe UI などのフォントを置き換える
 // @name:ko         PlumFont - Roboto, Segoe UI, Arial 및 기타 글꼴 교체
 // @name:ru         PlumFont - заменить Roboto, Segoe UI, Arial и другие шрифты
@@ -80,6 +76,7 @@
 // @match           https://*newsminimalist.com/*
 // @match           https://*.tauri.app/*
 // @match           https://docs.rs/*
+// @match           https://orm.drizzle.team/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -87,43 +84,37 @@
 
 // ==/UserScript==
 
-let globalMonoFont =
-    `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", "Noto Color Emoji", monospace`;
-let globalSansFont =
-    `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansFont =
-    `'Google Sans Text', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleSansDisplayFont =
-    `'Google Sans', 'Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
-let googleMonoFont =
-    `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, "Noto Color Emoji", monospace`;
-let globalSerifFont =
-    `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", "Noto Color Emoji", serif`;
+const globalMonoFont = `ui-monospace, "SF Mono", "Google Sans Mono", "JetBrains Mono","Roboto Mono", "Noto Color Emoji", monospace`;
+const globalSansFont = `ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Inter Variable",'Segoe UI Variable Display','Google Sans Text', 'PingFang SC', "思源黑体", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+const googleSansFont = `'Google Sans Text', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+const googleSansDisplayFont = `'Google Sans', 'Google Sans Display', "Inter", "Inter Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,'Segoe UI Variable Display', "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Noto Color Emoji", sans-serif`;
+const googleMonoFont = `"Google Sans Mono", "SF Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, "Noto Color Emoji", monospace`;
+const globalSerifFont = `ui-serif, "New York","Noto Serif", "思源宋体 VF", "思源宋体", "思源宋体 CN VF", "思源宋体 CN", "Noto Color Emoji", serif`;
 
-let domain = window.location.host;
+const domain = window.location.host;
 console.log(domain);
 
-/* Judge which language is used */
+/** Judge which language is used */
 let lang = "zh-CN";
 function judgeLanguage() {
-    lang = document.documentElement.lang;
-    if (lang === undefined) {
-        lang = window.navigator.language;
-    }
+  lang = document.documentElement.lang;
+  if (lang === undefined) {
+    lang = window.navigator.language;
+  }
 }
 function judgePlatform() {
-    let platform = "Not known";
-    if (navigator.appVersion.indexOf("Win") != -1) platform = "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) platform = "macOS";
-    if (navigator.appVersion.indexOf("X11") != -1) platform = "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) platform = "Linux";
-    return platform;
+  let platform = "Not known";
+  if (navigator.appVersion.indexOf("Win") !== -1) platform = "Windows";
+  if (navigator.appVersion.indexOf("Mac") !== -1) platform = "macOS";
+  if (navigator.appVersion.indexOf("X11") !== -1) platform = "UNIX";
+  if (navigator.appVersion.indexOf("Linux") !== -1) platform = "Linux";
+  return platform;
 }
 
 judgeLanguage();
 
-let styleList = {
-    "general": `
+const styleList = {
+  general: `
         html,body, input, textarea, select, button,h1,h2,h3,h4,h5,h6,b, strong{
             font-family: ${globalSansFont} !important;
         }
@@ -131,7 +122,7 @@ let styleList = {
         code,pre{
             font-family: ${globalMonoFont} !important;
         } `,
-    "github": `
+  github: `
         body {
             font-family:${googleSansFont} !important;
         }
@@ -140,7 +131,7 @@ let styleList = {
             font-family:${googleSansFont} !important;
         } `,
 
-    "notion": `
+  notion: `
         .notion-app-inner,.notion-selectable, .notion-page-block, div[placeholder*='Heading'] {
             font-family:  ${globalSansFont} !important;
         }
@@ -148,7 +139,7 @@ let styleList = {
         span[spellcheck='false'], div[spellcheck='false']{
             font-family: ${globalMonoFont} !important;
         }`,
-    "bilibili": `
+  bilibili: `
         /* 用户详情页中，"主页、动态、投稿、合计和列表" 后的数字 字体 */
         .n .n-num{
             font-family:${googleSansFont}
@@ -191,7 +182,7 @@ let styleList = {
         }
 
         `,
-    "googleSource": `
+  googleSource: `
         .u-monospace {
             font-family: ${globalMonoFont} !important;
         }
@@ -199,7 +190,7 @@ let styleList = {
         .Site {
             font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Google Sans Text","Inter", "Segoe UI Variable Display","Apple Color Emoji", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"!important;
         } `,
-    "google": `
+  google: `
         .gsfi, .lst,.gb_2a:not(.gb_Xd),.YrbPuc, .qHx7jd,.wHYlTd, h1, h2, h3, h4, h5, h6, body, .gb_ne, .ynRric, .wwUB2c, .lh87ke:link, .lh87ke:visited, .sbdb, .kpbb, .kpgrb, .ksb, .OouJcb, .rzG2be, .gb_oe,.gb_gd,.gb_ld, .kno-ecr-pt,.ynRric,.mus_tt8,.g,body,html,input,.std{
             font-family: ${googleSansFont} !important;
         }
@@ -276,7 +267,7 @@ let styleList = {
 
         `,
 
-    "youtube": `
+  youtube: `
         html,body,
         .ytd-rich-grid-media,
         .ytd-video-meta-block,
@@ -467,7 +458,6 @@ let styleList = {
 
 
         /*  Others
-
             Dropdown Menu,
             Radio Option,
             Right Click Menu
@@ -475,8 +465,6 @@ let styleList = {
             Alert with Button,
             Message,
             Icon Button,
-
-
          */
         .ytd-dropdown-item-renderer,
         .ytd-settings-radio-option-renderer,
@@ -518,7 +506,6 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
 
-
         /* Playlist - Video Title & Timestamp */
         .ytd-playlist-video-renderer,
         .ytd-grid-playlist-renderer {
@@ -532,7 +519,7 @@ let styleList = {
 
             `,
 
-    "dev.to": `
+  "dev.to": `
 
         :root{
             --ff-sans-serif: ${globalSansFont} !important;
@@ -541,11 +528,11 @@ let styleList = {
         }
 
         `,
-    "medium": `
+  medium: `
         .a,.bv,.bc {
             font-family:${globalSansFont} !important;
         } `,
-    "reddit": `
+  reddit: `
         body,
         ._292iotee39Lmt0MkQZ2hPV,
         ._2ucWAzao-GLL6qRJ4USwVJ,
@@ -562,36 +549,26 @@ let styleList = {
         ._34dh2eyzMvJfjCBLeoWiDD {
             font-family: ${globalSansFont} !important;
         } `,
-    "juejin": `
+  juejin: `
         body, html, .markdown-body{
         font-family: ${globalSansFont} !important;
         }
-
         .markdown-body pre, .markdown-body code, code, pre {
         font-family: ${globalMonoFont} !important;
         } `,
-
-    "vuejs.org": `
-        .line-number, code, kbd{
-            font-family: ${globalMonoFont} !important;
-        } `,
-
-    "grpc.io": `
+  "grpc.io": `
         .td-search-input{
         font-family: "Font Awesome 5 Free", ${globalSansFont} !important;
         } `,
-
-    "developer.chrome.com": `
+  "developer.chrome.com": `
         .banner, .material-button, .skip-link, .toc__wrapper a, .type, .type ol:not([class])>li::before, .type--caption, .type--label, .type--small, :root{
             font-family: ${googleSansFont} !important;
         }
         .type code, .type pre{
             font-family: ${googleMonoFont} !important;
         }
-
     `,
-
-    "web.dev": `
+  "web.dev": `
         body{
             font-family: ${googleSansFont} !important;
         }
@@ -599,13 +576,13 @@ let styleList = {
             font-family: ${googleMonoFont} !important;
         }
     `,
-    "developer.android.com": `
+  "developer.android.com": `
         :root{
             --devsite-primary-font-family: ${googleSansFont} !important;
             --devsite-code-font-family: ${googleMonoFont} !important;
         }
     `,
-    "infoq.cn": `
+  "infoq.cn": `
         html, body, button, input, select, textarea{
             font-family: ${googleSansFont} !important;
         }
@@ -618,7 +595,7 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    "mdBook": `
+  mdBook: `
         .fa {
             font-family: FontAwesome !important;
         }
@@ -633,9 +610,8 @@ let styleList = {
         .menu-title {
             font-weight: 400;
         }
-
     `,
-    "gin-gonic.com": `
+  "gin-gonic.com": `
         html, body {
             font-family: ${globalSansFont} !important;
         }
@@ -644,17 +620,21 @@ let styleList = {
             font-family: ${globalMonoFont} !important;
         }
     `,
-    "vuejs.org": `
+  "vuejs.org": `
     pre, code, kbd, samp{
         font-family: ${globalMonoFont} !important;
     }
+
+    .line-number, code, kbd{
+        font-family: ${globalMonoFont} !important;
+    }
     `,
-    "typescriptlang.org": `
+  "typescriptlang.org": `
     html{
         --body-font: ${globalSansFont} !important;
     }
     `,
-    "authing.cn": `
+  "authing.cn": `
     body{
         font-family: ${globalSansFont} !important;
     }
@@ -663,7 +643,7 @@ let styleList = {
         font-family: ${globalSansFont} !important;
     }
     `,
-    "go.dev": `
+  "go.dev": `
     body,html{
         font-family: ${globalSansFont} !important;
     }
@@ -671,16 +651,15 @@ let styleList = {
         font-family: ${globalMonoFont} !important;
     }
     `,
-    "typeorm.io": `
+  "typeorm.io": `
         h1, h2, h3{
             font-family: ${globalSansFont} !important;
         }
-
         code[class*="language-"], pre[class*="language-"]{
             font-family: ${globalMonoFont} !important;
     }
     `,
-    "gorm.io": `
+  "gorm.io": `
         .article-title{
             font-family: ${globalSansFont} !important;
         }
@@ -700,7 +679,7 @@ let styleList = {
             font-family: ${googleSansFont} !important;
         }
     `,
-    "cloudflare.com": `
+  "cloudflare.com": `
         body, button{
             font-family: ${globalSansFont} !important;
         }
@@ -741,13 +720,13 @@ let styleList = {
 
         }
     `,
-    "upwork.com": `
+  "upwork.com": `
         :root {
             --font-family-base: ${globalSansFont} !important;
             --font-family-monospace: ${globalMonoFont} !important;
         }
     `,
-    "stackoverflow": `
+  stackoverflow: `
 
     html, body{
         --ff-sans: ${globalSansFont} !important;
@@ -755,7 +734,7 @@ let styleList = {
         --ff-serif: ${globalSerifFont} !important;
     }
     `,
-    "gofiber.io": `
+  "gofiber.io": `
         :root {
                 --ifm-font-family-base: ${globalSansFont} !important;
                 --ifm-font-family-monospace: ${globalMonoFont} !important;
@@ -767,7 +746,7 @@ let styleList = {
             font-family: ${globalSansFont} !important;
         }
   `,
-    "tauri.app": `{
+  "tauri.app": `{
         :root {
             --__sl-font-system: ${globalSansFont} !important;
             --__sl-font-system-mono: ${globalMonoFont} !important;
@@ -778,193 +757,251 @@ let styleList = {
         code, pre, .code-header {
             font-family: ${globalMonoFont} !important;
         }
-  `
+  `,
+  "orm.drizzle.team": `
+        code {
+            font-family: ${globalMonoFont} !important;
+        }
+  `,
 };
 
-let rulesList = [{
-    "domains": "github.com",
-    "style": ["github"],
-}, {
-    "domains": "zhihu.com",
-    "style": ["general"],
-}, {
-    "domains": "notion.so",
-    "style": ["notion"],
-}, {
-    "domains": "bilibili.com",
-    "style": ["bilibili"],
-}, {
-    "domains": "googlesource.com",
-    "style": ["googleSource"],
-}, {
-    "domains": [
-        "google.com",
-        "google.com.hk",
-        "google.com.jp",
-        "google.com.tw",
-        "google.com.sg",
-        "google.com.kr",
-        "google.com.au",
+const rulesList = [
+  {
+    domains: "github.com",
+    style: ["github"],
+  },
+  {
+    domains: "zhihu.com",
+    style: ["general"],
+  },
+  {
+    domains: "notion.so",
+    style: ["notion"],
+  },
+  {
+    domains: "bilibili.com",
+    style: ["bilibili"],
+  },
+  {
+    domains: "googlesource.com",
+    style: ["googleSource"],
+  },
+  {
+    domains: [
+      "google.com",
+      "google.com.hk",
+      "google.com.jp",
+      "google.com.tw",
+      "google.com.sg",
+      "google.com.kr",
+      "google.com.au",
     ],
-    "style": ["google"],
-}, {
-    "domains": "youtube.com",
-    "style": ["youtube"],
-}, {
-    "domains": "flutter.dev",
-    "style": ["general"],
-}, {
-    "domains": "chaoxing.com",
-    "style": ["general"],
-}, {
-    "domains": "dev.to",
-    "style": ["dev.to"],
-}, {
-    "domains": "medium.com",
-    "style": ["medium"],
-}, {
-    "domains": "reddit.com",
-    "style": ["reddit"],
-}, {
-    "domains": "juejin.cn",
-    "style": ["juejin"],
-}, {
-    "domains": "tauri.app",
-    "style": ["general"],
-}, {
-    "domains": "quora.com",
-    "style": ["general"],
-}, {
-    "domains": "vuejs.org",
-    "style": ["vuejs.org"],
-}, {
-    "domains": "mybatis.org",
-    "style": ["general"],
-}, {
-    "domains": "grpc.io",
-    "style": ["general", "grpc.io"],
-}, {
-    "domains": "python.org",
-    "style": ["general"],
-}, {
-    "domains": "developer.chrome.com",
-    "style": ["developer.chrome.com"],
-}, {
-    "domains": "web.dev",
-    "style": ["web.dev"],
-}, {
-    "domains": "developer.android.com",
-    "style": ["developer.android.com"],
-}, {
-    "domains": "huggingface.co",
-    "style": ["general"],
-}, {
-    "domains": "ithome.com",
-    "style": ["general"],
-}, {
-    "domains": "google.github.io",
-    "style": ["mdBook"],
-}, {
-    "domains": "doc.rust-lang.org",
-    "style": ["mdBook"],
-}, {
-    "domains": "www.infoq.cn",
-    "style": ["infoq.cn"],
-}, {
-    "domains": "www.pixiv.net",
-    "style": ["general"],
-    "lang": ["zh-CN"],
-}, {
-    "domains": "gin-gonic.com",
-    "style": ["gin-gonic.com"],
-}, {
-    "domains": "v2ex.com",
-    "style": ["general"],
-}, {
-    "domains": "vuejs.org",
-    "style": ["vuejs.org"],
-}, {
-    "domains": ["d2l.ai"],
-    "style": ["general"],
-}, {
-    "domains": ["course.rs"],
-    "style": ["mdBook"],
-}, {
-    "domains": ["www.typescriptlang.org"],
-    "style": ["typescriptlang.org"],
-}, {
-    "domains": ["authing.cn"],
-    "style": ["authing.cn"],
-}, {
-    "domains": ["gopl-zh.github.io"],
-    "style": ["mdBook"],
-}, {
-    "domains": ["go.dev"],
-    "style": ["go.dev"],
-}, {
-    "domains": ["typeorm.io"],
-    "style": ["typeorm.io"],
-}, {
-    "domains": ["gorm.io"],
-    "style": ["gorm.io"],
-}, {
-    "domains": ["fxshu.top", "fuxsw.cc"],
-    "style": ["general"],
-}, {
-    "domains": ["cloudflare.com"],
-    "style": ["cloudflare.com"],
-}, {
-    "domains": ["loro.dev"],
-    "style": ["general"],
-}, {
-    "domains": ["upwork.com"],
-    "style": ["upwork.com"],
-}, {
-    "domains": ["stackoverflow.com"],
-    "style": ["stackoverflow"],
-}, {
-    "domains": ["gofiber.io"],
-    "style": ["gofiber.io"],
-}, {
-    "domains": ["newsminimalist.com"],
-    "style": ["general"],
-}, {
-    "domains": ["tauri.app"],
-    "style": ["tauri.app"],
-},{
-    "domains": ["docs.rs"],
-    "style": ["docs.rs"],
-}];
+    style: ["google"],
+  },
+  {
+    domains: "youtube.com",
+    style: ["youtube"],
+  },
+  {
+    domains: "flutter.dev",
+    style: ["general"],
+  },
+  {
+    domains: "chaoxing.com",
+    style: ["general"],
+  },
+  {
+    domains: "dev.to",
+    style: ["dev.to"],
+  },
+  {
+    domains: "medium.com",
+    style: ["medium"],
+  },
+  {
+    domains: "reddit.com",
+    style: ["reddit"],
+  },
+  {
+    domains: "juejin.cn",
+    style: ["juejin"],
+  },
+  {
+    domains: "tauri.app",
+    style: ["general"],
+  },
+  {
+    domains: "quora.com",
+    style: ["general"],
+  },
+  {
+    domains: "vuejs.org",
+    style: ["vuejs.org"],
+  },
+  {
+    domains: "mybatis.org",
+    style: ["general"],
+  },
+  {
+    domains: "grpc.io",
+    style: ["general", "grpc.io"],
+  },
+  {
+    domains: "python.org",
+    style: ["general"],
+  },
+  {
+    domains: "developer.chrome.com",
+    style: ["developer.chrome.com"],
+  },
+  {
+    domains: "web.dev",
+    style: ["web.dev"],
+  },
+  {
+    domains: "developer.android.com",
+    style: ["developer.android.com"],
+  },
+  {
+    domains: "huggingface.co",
+    style: ["general"],
+  },
+  {
+    domains: "ithome.com",
+    style: ["general"],
+  },
+  {
+    domains: "google.github.io",
+    style: ["mdBook"],
+  },
+  {
+    domains: "doc.rust-lang.org",
+    style: ["mdBook"],
+  },
+  {
+    domains: "www.infoq.cn",
+    style: ["infoq.cn"],
+  },
+  {
+    domains: "www.pixiv.net",
+    style: ["general"],
+    lang: ["zh-CN"],
+  },
+  {
+    domains: "gin-gonic.com",
+    style: ["gin-gonic.com"],
+  },
+  {
+    domains: "v2ex.com",
+    style: ["general"],
+  },
+  {
+    domains: "vuejs.org",
+    style: ["vuejs.org"],
+  },
+  {
+    domains: ["d2l.ai"],
+    style: ["general"],
+  },
+  {
+    domains: ["course.rs"],
+    style: ["mdBook"],
+  },
+  {
+    domains: ["www.typescriptlang.org"],
+    style: ["typescriptlang.org"],
+  },
+  {
+    domains: ["authing.cn"],
+    style: ["authing.cn"],
+  },
+  {
+    domains: ["gopl-zh.github.io"],
+    style: ["mdBook"],
+  },
+  {
+    domains: ["go.dev"],
+    style: ["go.dev"],
+  },
+  {
+    domains: ["typeorm.io"],
+    style: ["typeorm.io"],
+  },
+  {
+    domains: ["gorm.io"],
+    style: ["gorm.io"],
+  },
+  {
+    domains: ["fxshu.top", "fuxsw.cc"],
+    style: ["general"],
+  },
+  {
+    domains: ["cloudflare.com"],
+    style: ["cloudflare.com"],
+  },
+  {
+    domains: ["loro.dev"],
+    style: ["general"],
+  },
+  {
+    domains: ["upwork.com"],
+    style: ["upwork.com"],
+  },
+  {
+    domains: ["stackoverflow.com"],
+    style: ["stackoverflow"],
+  },
+  {
+    domains: ["gofiber.io"],
+    style: ["gofiber.io"],
+  },
+  {
+    domains: ["newsminimalist.com"],
+    style: ["general"],
+  },
+  {
+    domains: ["tauri.app"],
+    style: ["tauri.app"],
+  },
+  {
+    domains: ["docs.rs"],
+    style: ["docs.rs"],
+  },
+  {
+    domains: ["orm.drizzle.team"],
+    style: ["orm.drizzle.team"],
+  },
+];
 
 // using filter to find the matched rule
-let filteredList = rulesList.filter(({ domains, lang }) => {
-    let isMatch = true;
+const filteredList = rulesList.filter(({ domains, lang }) => {
+  let isMatch = true;
 
-    if (domains instanceof RegExp) {
-        isMatch = domains.test(domain);
-    } else if (typeof domains === "string") {
-        isMatch = domain.endsWith(domains);
-    } else if (domains instanceof Array) {
-        isMatch = domains.some((item) => domain.endsWith(item));
-    } else {
-        isMatch = false;
-    }
+  if (domains instanceof RegExp) {
+    isMatch = domains.test(domain);
+  } else if (typeof domains === "string") {
+    isMatch = domain.endsWith(domains);
+  } else if (Array.isArray(domains)) {
+    isMatch = domains.some((item) => domain.endsWith(item));
+  } else {
+    isMatch = false;
+  }
 
-    // if the rule has a "lang" property
-    // and the "lang" property doesn't contain current language => skip
-    if (isMatch === true && lang !== undefined && !lang.includes(lang)) {
-        console.log("language not match, skip this rule");
-        isMatch = false;
-    }
-    return isMatch;
+  // if the rule has a "lang" property
+  // and the "lang" property doesn't contain current language => skip
+  if (isMatch === true && lang !== undefined && !lang.includes(lang)) {
+    console.log("language not match, skip this rule");
+    isMatch = false;
+  }
+  return isMatch;
 });
 
 const style = filteredList
-    .flatMap(({ style: keyIndices }) => keyIndices.map((key) => styleList[key]))
-    .join("\n");
+  .flatMap(({ style: keyIndices }) => keyIndices.map((key) => styleList[key]))
+  .join("\n");
 
-let css = document.createElement("style");
-let text = document.createTextNode(style);
+const css = document.createElement("style");
+const text = document.createTextNode(style);
 css.appendChild(text);
-let head = document.getElementsByTagName("head")[0];
+const head = document.getElementsByTagName("head")[0];
 head.appendChild(css);
