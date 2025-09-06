@@ -22,7 +22,7 @@
 // @name:th         PlumFont - เปลี่ยน Roboto, Segoe UI, Arial และฟอนต์อื่น ๆ
 // @name:fil        PlumFont - Palitan ang Roboto, Segoe UI, Arial, at iba pang mga font
 
-// @version         1.1.6
+// @version         1.1.7
 // @description     将网页的字体替换为你更喜欢的字体。停止使用 Segoe UI、Arial 与微软雅黑。将英文数字使用苹方的字体替换为 SF Pro 与 Inter。
 // @author          Fibert Loyee
 // @run-at          document-start
@@ -77,6 +77,7 @@
 // @match           https://*.tauri.app/*
 // @match           https://docs.rs/*
 // @match           https://orm.drizzle.team/*
+// @match           https://www.cockroachlabs.com/*
 
 // @namespace    PlumFont
 // @license      MIT
@@ -783,6 +784,48 @@ const styleList = {
             font-family: ${globalMonoFont} !important;
         }
   `,
+    "cockroachdb": `
+        :root {
+            --font-family-monospace: ${globalMonoFont} !important;
+            --font-family-sans-serif: ${globalSansFont} !important;
+        }
+
+        p, body, strong {
+            font-family: ${globalSansFont} !important;
+        }
+
+        ul, ol {
+            font-family: ${globalSansFont} !important;
+        }
+
+        thead, tbody, tfoot, tr, td, th {
+            font-family: ${globalSansFont} !important;
+        }
+
+        /* Style: Callout Title */
+        .bs-callout__label {
+            font-family: ${globalSansFont} !important;
+        }
+
+        /* Style: Table Of Contents */
+        #toc>ul li a, #toc-right>ul li a {
+            font-family: ${globalSansFont} !important;
+        }
+
+        pre, code, kbd, samp {
+            font-family: ${globalMonoFont} !important;
+        }
+
+        /* Style: Footer */
+        .footer-nav li a {
+            font-family: ${globalSansFont} !important;
+        }
+
+        /* Style: Selector */
+        .filters .filter-button {
+            font-family: ${globalSansFont} !important;
+        }
+  `
 };
 
 const rulesList = [
@@ -991,6 +1034,10 @@ const rulesList = [
         domains: ["orm.drizzle.team"],
         style: ["orm.drizzle.team"],
     },
+    {
+        domains: ["www.cockroachlabs.com"],
+        style: ["cockroachdb"],
+    },
 ];
 
 // using filter to find the matched rule
@@ -1020,8 +1067,70 @@ const style = filteredList
     .flatMap(({ style: keyIndices }) => keyIndices.map((key) => styleList[key]))
     .join("\n");
 
-const css = document.createElement("style");
-const text = document.createTextNode(style);
-css.appendChild(text);
-const head = document.getElementsByTagName("head")[0];
-head.appendChild(css);
+// 负责确保 #plum-font-css 样式标签存在的函数
+// 注意：这个函数应该只负责插入，不负责删除旧的，因为我们假设被观察者会将其删除
+function ensurePlumFontStyles() {
+    const head = document.head || document.getElementsByTagName("head")[0]; // 确保获取到 head
+    if (!head) {
+        console.error("Head element not found, cannot apply styles.");
+        return;
+    }
+
+    let cssTag = document.getElementById('plum-font-css');
+
+    if (!cssTag) {
+        // 如果样式标签不存在，则创建并添加
+        cssTag = document.createElement("style");
+        cssTag.id = 'plum-font-css';
+        cssTag.textContent = style; // 使用 textContent 更简洁安全
+        head.appendChild(cssTag);
+        console.log("PlumFont styles created and applied to head.");
+    }
+    // 如果已存在，则不做任何处理，符合你的性能要求
+}
+
+
+// --- 1. 初始加载时应用样式 ---
+// 为了确保在文档准备好或脚本运行的第一个可能时机应用样式
+// document-end 或 document-idle 的油猴脚本通常在这个时候执行。
+ensurePlumFontStyles();
+
+// --- 2. 监听 <head> 元素的变化 ---
+// 目标是当 <head> 内部的子节点（包括我们的 <style> 标签）被移除时触发。
+const headObserverCallback = (mutationsList, observer) => {
+    let styleTagRemoved = false;
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            // 检查是否有节点被移除
+            mutation.removedNodes.forEach(node => {
+                if (node.id === 'plum-font-css' && node.tagName === 'STYLE') {
+                    styleTagRemoved = true;
+                    console.log("#plum-font-css tag was removed.");
+                }
+            });
+            // 也可以简单地检查 head 中是否存在 #plum-font-css
+            // 如果 MutationObserver 触发，就重新检查一下确保存在
+            if (!document.getElementById('plum-font-css')) {
+                styleTagRemoved = true; // 即使不是直接被移除的，只要不存在就认为需要重新应用
+            }
+        }
+    }
+
+    // 如果检测到我们的 style 标签被移除，或者干脆不存在了
+    if (styleTagRemoved) {
+        ensurePlumFontStyles(); // 重新确保它存在
+    }
+};
+
+// 创建 MutationObserver 实例，观察 <head>
+const headElement = document.head || document.getElementsByTagName("head")[0];
+if (headElement) {
+    const headObserver = new MutationObserver(headObserverCallback);
+
+    // 我们只关心 <head> 的直接子节点（childList）的增删，不关心子孙节点（subtree: false）
+    // 也不需要关心属性变化（attributes: false），这样是最轻量级的监听。
+    headObserver.observe(headElement, { childList: true, subtree: false });
+    console.log("MutationObserver for <head> childList initialized.");
+} else {
+    console.error("Could not find <head> element to observe.");
+}

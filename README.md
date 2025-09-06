@@ -62,3 +62,5 @@
 46. [Go Fiber](https://gofiber.io)
 47. [News Minimalist](https://www.newsminimalist.com)
 48. [docs.rs](https://docs.rs)
+49. [orm.drizzle.com](https://orm.drizzle.com)
+50. [CockroachDB Labs ](https://www.cockroachlabs.com/)
